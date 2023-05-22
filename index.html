@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic-Tac-Toe</title>
+</head>
+<body>
+    <div class="container">
+        <form onsubmit="validateCaptcha(); return false;" class="popup-open1">
+            <div class="words">Enter Player O Name:</div>
+            <div class="inp"><input class="inpit" type="text"></div>
+            <div class="captcha">
+                <input id="captcha-input" type="text" placeholder="Enter the Captcha">
+                <span id="captcha-image"></span>
+            </div>
+            <div><input type="submit" value="Submit"></div>
+        </form>
+
+        <div class="title">Tic-Tac-Toe!</div>
+        <div class="center">
+            <div class="box1 box"></div>
+            <div class="box2 box"></div>
+            <div class="box3 box"></div>
+            <div class="box4 box"></div>
+            <div class="box5 box"></div>
+            <div class="box6 box"></div>
+            <div class="box7 box"></div>
+            <div class="box8 box"></div>
+            <div class="box9 box"></div>
+        </div>
+        <div class="reset"><div class="word">Reset</div></div>
+        <div class="screen">
+            <div class="big">You</div>
+            <div class="small">Go First</div>
+        </div>
+        <div class="popup"><div class="words"></div><div class="won">You Won!</div><div class="restart" onclick="Gameboard.reset2()">Restart</div></div> 
+    </div>
+
+    <script>
+        function generateCaptcha() {
+            const captchaImage = document.getElementById("captcha-image");
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let captchaText = "";
+
+            for (let i = 0; i < 6; i++) {
+                captchaText += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+
+            captchaImage.textContent = captchaText;
+        }
+
+        function validateCaptcha() {
+            const captchaInput = document.getElementById("captcha-input");
+            const captchaImage = document.getElementById("captcha-image");
+
+            if (captchaInput.value.toLowerCase() === captchaImage.textContent.toLowerCase()) {
+                // CAPTCHA is valid, proceed with form submission or desired action
+                Gameboard.siv2();
+            } else {
+                // CAPTCHA is invalid, display an error message or take appropriate action
+                alert("Invalid CAPTCHA. Please try again.");
+            }
+
+            // Reset CAPTCHA values
+            captchaInput.value = "";
+            generateCaptcha();
+        }
+
+        // Generate initial CAPTCHA
+        generateCaptcha();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
